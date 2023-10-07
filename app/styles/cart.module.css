@@ -1,0 +1,186 @@
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3.6rem;
+  padding-bottom: 3.6rem;
+}
+
+.cartContainer h1 {
+  padding: 0.2rem;
+  text-align: center;
+}
+
+/* Before Ordering */
+/* Item */
+.item {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 2px 10px;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+}
+
+/* Menu Name */
+.menuName {
+  padding: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Options */
+.options {
+  text-align: start;
+}
+
+/* Amount */
+.amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.amount p {
+  padding: 0.5rem;
+}
+
+.amount p span {
+  border-bottom: solid;
+  border-color: blue;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.amount div button {
+  padding: 0.3rem;
+  margin: 0.1rem;
+  background-color: black;
+  color: white;
+  border-style: none;
+  border-radius: 0.3rem;
+}
+
+/* Price & Delete */
+.priceAndDelete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.priceAndDelete p {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.priceAndDelete button {
+  color: white;
+  background-color: black;
+  border-style: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Total Price */
+.totalPrice {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 2px 2px 10px black;
+  background-color: gray;
+  color: white;
+}
+
+/* Buttons */
+.buttons {
+  background-color: black;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 0.5rem 0.5rem 0 0;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  box-shadow: 0px -2px 10px black;
+}
+
+.buttons a {
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem;
+}
+
+.buttons button {
+  background-color: green;
+  color: white;
+  padding: 0.5rem;
+  border-style: none;
+  border-radius: 0.5rem;
+}
+
+/* After Ordering */
+/* Placed Order */
+.placedOrder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+/* Menu Order */
+.menuOrder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+}
+
+.menuOrder p {
+  text-align: start;
+  width: 60%;
+}
+
+.amountAndPrice {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+
+/* Option Order */
+.optionOrder {
+  display: flex;
+  width: 95%;
+}
+
+.optionOrder p {
+  padding-left: 0.3rem;
+}
+
+/* Placed Order Price */
+.placedOrderPrice {
+  display: flex;
+  justify-content: flex-end;
+  background-color: gray;
+  color: white;
+  padding: 0.5rem;
+  width: 95%;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 10px black;
+}
+
+/* Back To Home */
+.backToHome {
+  color: white;
+  background-color: green;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  text-decoration: none;
+}

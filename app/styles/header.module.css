@@ -1,0 +1,21 @@
+.headerContainer {
+  display: flex;
+  background-color: black;
+  padding: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 2px 10px;
+}
+
+.headerContainer p {
+  color: white;
+  margin-left: 0.8rem;
+}
+
+.home {
+  color: white;
+  margin-right: 0.8rem;
+}
