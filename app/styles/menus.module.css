@@ -9,7 +9,7 @@
 /* Categories */
 .categories {
   position: fixed;
-  top: 2.5rem;
+  top: 2.25rem;
   direction: row;
   overflow-x: auto;
   white-space: nowrap;
