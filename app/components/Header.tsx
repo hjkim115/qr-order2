@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { FaHome } from 'react-icons/fa'
 import { getCompanyName } from '../utils/firebase'
 import headerStyles from '../styles/header.module.css'
+import Loading from './Loading'
 
 export default function Header() {
   const [companyName, setCompanyName] = useState<string | null>(null)
@@ -30,7 +31,14 @@ export default function Header() {
 
   return (
     <div className={headerStyles.headerContainer}>
-      <p>{companyName}</p>
+      {companyName ? (
+        <p>{companyName}</p>
+      ) : (
+        <div className={headerStyles.loading}>
+          {' '}
+          <Loading size="1.25rem" />
+        </div>
+      )}
       {pathName !== baseUrl ? (
         <FaHome
           onClick={() => router.push(baseUrl)}

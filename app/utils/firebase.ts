@@ -39,7 +39,7 @@ const db = getFirestore(app)
 
 //Categories Get All
 export async function getAllCategories(store: string) {
-  const categoriesRef = collection(db, `${store}Categories`)
+  const categoriesRef = collection(doc(db, 'categories', store), 'categories')
   const categoriesQuery = query(categoriesRef, orderBy('id'))
   const snapshot = await getDocs(categoriesQuery)
 
@@ -53,16 +53,16 @@ export async function getAllCategories(store: string) {
 
 //Company Name Get
 export async function getCompanyName(store: string) {
-  const companyNameRef = doc(db, `${store}Settings`, 'companyName')
-  const snapshot = await getDoc(companyNameRef)
-  const companyName = snapshot.data()?.name as string
+  const settingsRef = doc(db, 'settings', store)
+  const snapshot = await getDoc(settingsRef)
+  const companyName = snapshot.data()?.companyName as string
 
   return companyName
 }
 
 //Tables Get All
 export async function getAllTables(store: string) {
-  const tablesRef = collection(db, `${store}Tables`)
+  const tablesRef = collection(doc(db, 'tables', store), 'tables')
   const snapshot = await getDocs(tablesRef)
 
   const tables: Table[] = []
@@ -75,7 +75,7 @@ export async function getAllTables(store: string) {
 
 //Menus Get All
 export async function getAllMenus(store: string) {
-  const menusRef = collection(db, `${store}Menus`)
+  const menusRef = collection(doc(db, 'menus', store), 'menus')
   const snapshot = await getDocs(menusRef)
 
   const menus: Menu[] = []
@@ -88,7 +88,7 @@ export async function getAllMenus(store: string) {
 
 //Menu Get
 export async function getMenu(store: string, category: string, id: string) {
-  const menuRef = doc(db, `${store}Menus`, `${category}-${id}`)
+  const menuRef = doc(doc(db, 'menus', store), 'menus', `${category}-${id}`)
   const snapshot = await getDoc(menuRef)
   const menu = snapshot.data() as Menu
 
@@ -97,7 +97,7 @@ export async function getMenu(store: string, category: string, id: string) {
 
 //Options Get
 export async function getOptions(store: string, category: string, id: string) {
-  const optionsRef = collection(db, `${store}Options`)
+  const optionsRef = collection(doc(db, 'options', store), 'options')
   const optionsQuery = query(
     optionsRef,
     where('menuCategory', '==', category),

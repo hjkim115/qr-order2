@@ -7,6 +7,7 @@ import { getMenu, getOptions } from '@/app/utils/firebase'
 import { useParams, useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { CartContext } from '../../../../context/CartContext'
+import LoadingPage from '@/app/components/LoadingPage'
 
 export default function Menu() {
   const [menu, setMenu] = useState<Menu | null>(null)
@@ -153,9 +154,9 @@ export default function Menu() {
   }
 
   return (
-    <div className={detailsStyles.detailsContainer}>
-      {menu ? (
-        <>
+    <>
+      {menu && options ? (
+        <div className={detailsStyles.detailsContainer}>
           {/* Name*/}
           <h1>
             {menu.category}-{menu.id}.{menu.englishName}
@@ -191,7 +192,7 @@ export default function Menu() {
           </p>
 
           {/* Options */}
-          {options && Object.keys(options).length > 0 ? (
+          {Object.keys(options).length > 0 ? (
             <div className={detailsStyles.options}>
               {Object.keys(options).map((key) => (
                 <>
@@ -224,8 +225,10 @@ export default function Menu() {
             <Link href={`/${store}/${table}/menus`}>{'<<'}Go Back</Link>
             <button onClick={addToCart}>Add To Cart</button>
           </div>
-        </>
-      ) : null}
-    </div>
+        </div>
+      ) : (
+        <LoadingPage />
+      )}
+    </>
   )
 }

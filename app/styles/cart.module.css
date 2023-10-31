@@ -123,6 +123,12 @@
 }
 
 /* After Ordering */
+.pending {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 /* Placed Order */
 .placedOrder {
   display: flex;

@@ -7,6 +7,7 @@ import menusStyles from '../../../styles/menus.module.css'
 import { Category, Menu } from '@/app/utils/types'
 import { FaShoppingCart } from 'react-icons/fa'
 import { CartContext } from '../../../context/CartContext'
+import LoadingPage from '@/app/components/LoadingPage'
 
 export default function Menus() {
   const [categories, setCategories] = useState<Category[] | null>(null)
@@ -62,70 +63,78 @@ export default function Menus() {
   }
 
   return (
-    <div className={menusStyles.menusContainer}>
-      {/* Categories */}
-      <div className={menusStyles.categories}>
-        {categories?.map((category, i) => (
-          <button
-            onClick={() => changeCategory(category)}
-            style={
-              currentCategory?.id === category.id
-                ? {
-                    color: 'black',
-                    borderBottom: 'solid',
-                    borderWidth: '2px',
-                  }
-                : undefined
-            }
-          >
-            {category.englishName}
-          </button>
-        ))}
-      </div>
-
-      {/* Menus */}
-      <div className={menusStyles.menus}>
-        {menus?.filter(checkCategory).map((menu) => (
-          <div
-            className={menusStyles.menu}
-            onClick={() => {
-              router.push(`${pathName}/${menu.id}?category=${menu.category}`)
-            }}
-          >
-            <div
-              style={{
-                backgroundImage: `url('${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${menu.imageName}')`,
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-              }}
-              className={menusStyles.menuImage}
-            />
-            <p>
-              {menu.category}-{menu.id}.{menu.englishName}
-            </p>
-            <button>Add To Cart</button>
+    <>
+      {categories && menus ? (
+        <div className={menusStyles.menusContainer}>
+          {/* Categories */}
+          <div className={menusStyles.categories}>
+            {categories?.map((category, i) => (
+              <button
+                onClick={() => changeCategory(category)}
+                style={
+                  currentCategory?.id === category.id
+                    ? {
+                        color: 'black',
+                        borderBottom: 'solid',
+                        borderWidth: '2px',
+                      }
+                    : undefined
+                }
+              >
+                {category.englishName}
+              </button>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {/* Cart */}
-      <button
-        onClick={() => {
-          router.push(`/${store}/${table}/cart`)
-        }}
-        className={menusStyles.cart}
-        disabled={cart.length <= 0}
-      >
-        {cart.length > 0 ? (
-          <>
-            <FaShoppingCart size="1rem" /> ×{getTotalAmount()} Total Price: $
-            {getTotalPrice().toFixed(2)}
-          </>
-        ) : (
-          'No items in your cart!'
-        )}
-      </button>
-    </div>
+          {/* Menus */}
+          <div className={menusStyles.menus}>
+            {menus?.filter(checkCategory).map((menu) => (
+              <div
+                className={menusStyles.menu}
+                onClick={() => {
+                  router.push(
+                    `${pathName}/${menu.id}?category=${menu.category}`
+                  )
+                }}
+              >
+                <div
+                  style={{
+                    backgroundImage: `url('${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${menu.imageName}')`,
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                  }}
+                  className={menusStyles.menuImage}
+                />
+                <p>
+                  {menu.category}-{menu.id}.{menu.englishName}
+                </p>
+                <button>Add To Cart</button>
+              </div>
+            ))}
+          </div>
+
+          {/* Cart */}
+          <button
+            onClick={() => {
+              router.push(`/${store}/${table}/cart`)
+            }}
+            className={menusStyles.cart}
+            disabled={cart.length <= 0}
+          >
+            {cart.length > 0 ? (
+              <>
+                <FaShoppingCart size="1rem" /> ×{getTotalAmount()} Total Price:
+                ${getTotalPrice().toFixed(2)}
+              </>
+            ) : (
+              'No items in your cart!'
+            )}
+          </button>
+        </div>
+      ) : (
+        <LoadingPage />
+      )}
+    </>
   )
 }
