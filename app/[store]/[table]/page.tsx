@@ -14,7 +14,6 @@ export default function Home() {
         <img
           src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/logo.png`}
           width={200}
-          height={200}
           alt="logo"
         />
         <p>Table: {table}</p>

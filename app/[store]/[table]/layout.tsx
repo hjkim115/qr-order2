@@ -6,6 +6,7 @@ import Header from '@/app/components/Header'
 import { getAllTables } from '@/app/utils/firebase'
 import { Table } from '@/app/utils/types'
 import { CartContextProvider } from '@/app/context/CartContext'
+import { CurrentCategoryContextProvider } from '@/app/context/CurrentCategoryContext'
 
 export default function QrOrderLayout({
   children,
@@ -46,8 +47,10 @@ export default function QrOrderLayout({
     <section>
       {isValidTable() ? (
         <CartContextProvider>
-          <Header />
-          {children}
+          <CurrentCategoryContextProvider>
+            <Header />
+            {children}
+          </CurrentCategoryContextProvider>
         </CartContextProvider>
       ) : null}
     </section>

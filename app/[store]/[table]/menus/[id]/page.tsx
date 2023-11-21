@@ -92,6 +92,11 @@ export default function Menu() {
       throw Error('Menu is not set!')
     }
 
+    if (selectedOptions.includes(null)) {
+      alert('Make sure that you selected all required options!')
+      return
+    }
+
     let hasItem = false
     let i
     for (i = 0; i < cart.length; i++) {
@@ -165,7 +170,7 @@ export default function Menu() {
           {/* Image */}
           <img
             src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${menu.imageName}`}
-            width={200}
+            width={250}
             height={200}
             alt={`${menu.englishName}`}
           />
@@ -200,7 +205,7 @@ export default function Menu() {
                   <select
                     onChange={(e) => handleOptionsChange(key, e.target.value)}
                   >
-                    <option value="">Default</option>
+                    <option value="">Select {key}!</option>
                     {options[key].map((option, i) => (
                       <option value={i}>
                         {option.englishName} (++${option.price})

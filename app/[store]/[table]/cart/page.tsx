@@ -12,6 +12,7 @@ import {
   postOrderDetails,
 } from '@/app/utils/firebase'
 import Loading from '@/app/components/Loading'
+import { CurrentCategoryContext } from '@/app/context/CurrentCategoryContext'
 
 export default function Cart() {
   const [orderStatus, setOrderStatus] = useState<'Pending' | 'Placed' | null>(
@@ -28,6 +29,7 @@ export default function Cart() {
     getTotalPrice,
     clear,
   } = useContext(CartContext)
+  const { setCurrentCategory } = useContext(CurrentCategoryContext)
   const router = useRouter()
   const { store, table } = useParams()
 
@@ -152,6 +154,7 @@ export default function Cart() {
     //Placed!
     setOrderStatus('Placed')
     clear()
+    setCurrentCategory(null)
   }
 
   return (

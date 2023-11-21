@@ -8,17 +8,20 @@ import { Category, Menu } from '@/app/utils/types'
 import { FaShoppingCart } from 'react-icons/fa'
 import { CartContext } from '../../../context/CartContext'
 import LoadingPage from '@/app/components/LoadingPage'
+import { CurrentCategoryContext } from '@/app/context/CurrentCategoryContext'
 
 export default function Menus() {
   const [categories, setCategories] = useState<Category[] | null>(null)
   const [menus, setMenus] = useState<Menu[] | null>(null)
-  const [currentCategory, setCurrentCategory] = useState<Category | null>(null)
 
   const pathName = usePathname()
   const { store, table } = useParams()
   const router = useRouter()
 
   const { cart, getTotalAmount, getTotalPrice } = useContext(CartContext)
+  const { currentCategory, setCurrentCategory } = useContext(
+    CurrentCategoryContext
+  )
 
   useEffect(() => {
     async function fetchCategories() {
@@ -49,7 +52,9 @@ export default function Menus() {
 
   useEffect(() => {
     if (categories) {
-      setCurrentCategory(categories[0])
+      if (!currentCategory) {
+        setCurrentCategory(categories[0])
+      }
     }
   }, [categories])
 
@@ -77,6 +82,7 @@ export default function Menus() {
                         color: 'black',
                         borderBottom: 'solid',
                         borderWidth: '2px',
+                        fontSize: '1rem',
                       }
                     : undefined
                 }
@@ -115,22 +121,23 @@ export default function Menus() {
           </div>
 
           {/* Cart */}
-          <button
-            onClick={() => {
-              router.push(`/${store}/${table}/cart`)
-            }}
-            className={menusStyles.cart}
-            disabled={cart.length <= 0}
-          >
-            {cart.length > 0 ? (
-              <>
-                <FaShoppingCart size="1rem" /> ×{getTotalAmount()} Total Price:
-                ${getTotalPrice().toFixed(2)}
-              </>
-            ) : (
-              'No items in your cart!'
-            )}
-          </button>
+          <div className={menusStyles.cart}>
+            <button
+              onClick={() => {
+                router.push(`/${store}/${table}/cart`)
+              }}
+              disabled={cart.length <= 0}
+            >
+              {cart.length > 0 ? (
+                <>
+                  <FaShoppingCart size="1rem" /> ×{getTotalAmount()} Total
+                  Price: ${getTotalPrice().toFixed(2)}
+                </>
+              ) : (
+                'No items in your cart!'
+              )}
+            </button>
+          </div>
         </div>
       ) : (
         <LoadingPage />
