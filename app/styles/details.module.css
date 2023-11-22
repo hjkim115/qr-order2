@@ -12,11 +12,6 @@
   text-align: center;
 }
 
-/* image */
-.detailsContainer img {
-  margin: 0.5rem;
-}
-
 /* Amount */
 .amount {
   display: flex;
@@ -80,6 +75,7 @@
 .description {
   text-align: justify;
   padding: 0.5rem;
+  width: 80%;
 }
 
 .description span {

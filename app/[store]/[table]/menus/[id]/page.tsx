@@ -168,11 +168,15 @@ export default function Menu() {
           </h1>
 
           {/* Image */}
-          <img
-            src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${menu.imageName}`}
-            width={250}
-            height={200}
-            alt={`${menu.englishName}`}
+          <div
+            style={{
+              backgroundImage: `url('${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${menu.imageName}')`,
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'contain',
+              width: '80%',
+              height: '30vh',
+            }}
           />
 
           {/* Amount */}
