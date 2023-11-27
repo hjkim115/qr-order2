@@ -55,7 +55,7 @@ export async function getAllCategories(store: string) {
 export async function getCompanyName(store: string) {
   const settingsRef = doc(db, 'settings', store)
   const snapshot = await getDoc(settingsRef)
-  const companyName = snapshot.data()?.companyName as string
+  const companyName = snapshot.data()?.name as string
 
   return companyName
 }
