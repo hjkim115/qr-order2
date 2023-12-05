@@ -88,11 +88,20 @@ export async function getAllMenus(store: string) {
 
 //Menu Get
 export async function getMenu(store: string, category: string, id: string) {
-  const menuRef = doc(doc(db, 'menus', store), 'menus', `${category}-${id}`)
-  const snapshot = await getDoc(menuRef)
-  const menu = snapshot.data() as Menu
+  const menusRef = collection(doc(db, 'menus', store), 'menus')
+  const menusQuery = query(
+    menusRef,
+    where('category', '==', category),
+    where('id', '==', id)
+  )
+  const snapshot = await getDocs(menusQuery)
 
-  return menu
+  const menus: Menu[] = []
+  snapshot.forEach((document) => {
+    menus.push(document.data() as Menu)
+  })
+
+  return menus[0]
 }
 
 //Options Get
