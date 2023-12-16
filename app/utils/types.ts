@@ -1,3 +1,5 @@
+import { UUID } from 'crypto'
+
 export type Category = {
   id: string
   englishName: string
@@ -39,18 +41,19 @@ export type Item = {
   options: (Option | null)[]
 }
 
-export type OrderHeader = {
+export type Order = {
   id: string
-  table: string
-  status: 'Unread' | 'Read'
-  totalPrice: number
-}
-
-export type OrderDetail = {
-  id: string
+  seq: number
   table: string
   status: 'Unread' | 'Read'
   menu: string
   price: number
   amount: number
+  date: string
+  time: string
+}
+
+export type Settings = {
+  name: string
+  logoImageName: string
 }

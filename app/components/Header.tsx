@@ -1,33 +1,20 @@
 'use client'
 
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
 import { FaHome } from 'react-icons/fa'
-import { getCompanyName } from '../utils/firebase'
 import headerStyles from '../styles/header.module.css'
 import Loading from './Loading'
+import { SettingsContext } from '../context/SettingsContext'
 
 export default function Header() {
-  const [companyName, setCompanyName] = useState<string | null>(null)
-
   const { store, table } = useParams()
   const pathName = usePathname()
   const router = useRouter()
   const baseUrl = `/${store}/${table}`
 
-  useEffect(() => {
-    async function fetchCompanyName() {
-      if (typeof store !== 'string') {
-        throw Error('Type of store should be string!')
-      }
-      const data = await getCompanyName(store)
-      setCompanyName(data)
-    }
-
-    if (store) {
-      fetchCompanyName()
-    }
-  }, [store])
+  const { settings } = useContext(SettingsContext)
+  const companyName = settings?.name
 
   return (
     <div className={headerStyles.headerContainer}>

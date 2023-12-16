@@ -4,13 +4,9 @@ import { useState, useContext } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { CartContext } from '../../../context/CartContext'
 import cartStyles from '../../../styles/cart.module.css'
-import { Item, OrderDetail, OrderHeader } from '@/app/utils/types'
+import { Item, Order } from '@/app/utils/types'
 import Link from 'next/link'
-import {
-  getLastOrderIdOrNull,
-  postOrderHeader,
-  postOrderDetails,
-} from '@/app/utils/firebase'
+import { postOrders } from '@/app/utils/firebase'
 import Loading from '@/app/components/Loading'
 import { CurrentCategoryContext } from '@/app/context/CurrentCategoryContext'
 
@@ -69,11 +65,13 @@ export default function Cart() {
     setPlacedOrder(cart)
     setPlacedOrderPrice(getTotalPrice())
 
-    //Last Order Id
-    const lastId = await getLastOrderIdOrNull(store)
+    //seq
+    let seq = 1
 
-    //Date
-    const dateString = new Date().toLocaleDateString('en-SG', {
+    //Date & Time
+    const dateTime = new Date()
+
+    const dateString = dateTime.toLocaleDateString('en-SG', {
       dateStyle: 'short',
     })
     const dateArray = dateString.split('/')
@@ -85,71 +83,55 @@ export default function Cart() {
       day.length < 2 ? '0' + day : day
     }`
 
-    //Set Id
-    let newId
-    if (lastId == null) {
-      newId = `${date}e0001`
-    } else {
-      const lastIdArray = lastId.split('e')
-      const lastIdDate = lastIdArray[0]
-      const lastIdNumber = lastIdArray[1]
+    const timeString = dateTime.toLocaleTimeString('en-SG', {
+      timeStyle: 'medium',
+    })
 
-      if (lastIdDate !== date) {
-        newId = `${date}e0001`
-      } else {
-        newId = `${date}e`
+    const time = timeString.split(' ')[0]
 
-        const newIdNumber = Number(lastIdNumber) + 1
-        const zeroCount = 4 - newIdNumber.toString().length
-        for (let i = 0; i < zeroCount; i++) {
-          newId += '0'
-        }
-        newId += newIdNumber.toString()
-      }
-    }
-
-    //Post Order Header
-    const orderHeader: OrderHeader = {
-      id: newId,
-      table: table,
-      status: 'Unread',
-      totalPrice: getTotalPrice(),
-    }
-
-    await postOrderHeader(store, orderHeader)
+    //New Id
+    const newId = crypto.randomUUID()
 
     //Post Order Details
-    const orderDetails: OrderDetail[] = []
+    const orders: Order[] = []
 
     for (const item of cart) {
-      const menuOrderDetail: OrderDetail = {
+      const menuOrder: Order = {
         id: newId,
+        seq: seq,
         table: table,
         status: 'Unread',
         menu: `${item.menu.category}-${item.menu.id}.${item.menu.englishName}`,
         price: getItemPrice(item.menu.price, item.amount),
         amount: item.amount,
+        date: date,
+        time: time,
       }
-      orderDetails.push(menuOrderDetail)
+      seq++
+      orders.push(menuOrder)
 
       for (const option of item.options) {
         if (option == null) {
           continue
         }
 
-        const optionOrderDetail: OrderDetail = {
+        const optionOrder: Order = {
           id: newId,
+          seq: seq,
           table: table,
           status: 'Unread',
           menu: `++ ${option.englishName}(${option.price})`,
           price: getItemPrice(option.price, item.amount),
           amount: item.amount,
+          date: date,
+          time: time,
         }
-        orderDetails.push(optionOrderDetail)
+        seq++
+        orders.push(optionOrder)
       }
     }
 
-    await postOrderDetails(store, orderDetails)
+    await postOrders(store, orders)
 
     //Placed!
     setOrderStatus('Placed')
