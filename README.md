@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# QR Food Ordering Website
 
-## Getting Started
+This website is food ordering website for restaurants. Users can access through QR code, add items to cart and place orders. Once orders are placed, they are sent cloud so that it can be sent to POS (Point of Sale) system and processed.
 
-First, run the development server:
+## URL
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Available at: <a href='https://qr-order2.vercel.app/test/01'>https://qr-order2.vercel.app/test/01</a>
+![QR](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/QR.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![Diagram](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/diagram.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Developed user interface of the website using **Next.js (React.js)** and **TypeScript (JavaScript)**.
+- Connected user interface with **Firestore** cloud database using **Firebase SDK**.
+- Used **AWS S3 bucket** and **Cloudfront CDN** to dynamically serve food images.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+**Home**
+![Home](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/home.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- On the homepage restaurant's logo and table number are displayed, and users can go to the menus page by clicking the 'order now' button.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Menus**
+![Menus](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/menus.png)
 
-## Deploy on Vercel
+- Users can filter menus by category using the scroll buttons at the top of the 'menus' page.
+- When users select menu they want, they will be taken to the page, where they can select options and quantity and add to cart.
+- Once users have added menu to the cart, they can move to the cart page by clicking the cart button at the bottom of the 'menus' page.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Cart**
+![Cart](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/cart.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- On the 'cart' page, users can delete or change the quantity of selected items before placing the order.
+- Once an order is completed, order details are displayed with button to return to home.
