@@ -4,7 +4,7 @@ This website is food ordering website for restaurants. Users can access through 
 
 ## URL
 
-Available at: <a href='https://qr-order2.vercel.app/test/01'>https://qr-order2.vercel.app/test/01</a>
+**Available at:** <a href='https://qr-order2.vercel.app/test/01'>https://qr-order2.vercel.app/test/01</a>\
 ![QR](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/QR.png)
 
 ## Technologies Used
@@ -17,19 +17,22 @@ Available at: <a href='https://qr-order2.vercel.app/test/01'>https://qr-order2.v
 
 ## Features
 
-**Home**
+### Home
+
 ![Home](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/home.png)
 
 - On the homepage restaurant's logo and table number are displayed, and users can go to the menus page by clicking the 'order now' button.
 
-**Menus**
+### Menus
+
 ![Menus](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/menus.png)
 
 - Users can filter menus by category using the scroll buttons at the top of the 'menus' page.
 - When users select menu they want, they will be taken to the page, where they can select options and quantity and add to cart.
 - Once users have added menu to the cart, they can move to the cart page by clicking the cart button at the bottom of the 'menus' page.
 
-**Cart**
+### Cart
+
 ![Cart](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/cart.png)
 
 - On the 'cart' page, users can delete or change the quantity of selected items before placing the order.
