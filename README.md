@@ -29,11 +29,11 @@ This website is food ordering website for restaurants. Users can access through 
 
 - Users can filter menus by category using the scroll buttons at the top of the 'menus' page.
 - When users select menu they want, they will be taken to the page, where they can select options and quantity and add to cart.
-- Once users have added menu to the cart, they can move to the cart page by clicking the cart button at the bottom of the 'menus' page.
+- Once users have added menu to the cart, they can navigate to the 'cart' page by clicking the cart button at the bottom of the 'menus' page.
 
 ### Cart
 
 ![Cart](https://github.com/hjkim115/qr-order2/blob/main/public/readMeImage/cart.png)
 
 - On the 'cart' page, users can delete or change the quantity of selected items before placing the order.
-- Once an order is completed, order details are displayed with button to return to home.
+- Once an order is completed, order details are displayed with button that returns to 'home' page.
