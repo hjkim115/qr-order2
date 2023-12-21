@@ -67,6 +67,16 @@ export default function Menus() {
     return currentCategory?.id === menu.category
   }
 
+  function checkSort(a: Menu, b: Menu) {
+    if (Number(a.id) > Number(b.id)) {
+      return 1
+    }
+    if (Number(a.id) < Number(b.id)) {
+      return -1
+    }
+    return 0
+  }
+
   return (
     <>
       {categories && menus ? (
@@ -94,30 +104,33 @@ export default function Menus() {
 
           {/* Menus */}
           <div className={menusStyles.menus}>
-            {menus?.filter(checkCategory).map((menu) => (
-              <div
-                className={menusStyles.menu}
-                onClick={() => {
-                  router.push(
-                    `${pathName}/${menu.id}?category=${menu.category}`
-                  )
-                }}
-              >
+            {menus
+              ?.filter(checkCategory)
+              .sort(checkSort)
+              .map((menu) => (
                 <div
-                  style={{
-                    backgroundImage: `url('${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${menu.imageName}')`,
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
+                  className={menusStyles.menu}
+                  onClick={() => {
+                    router.push(
+                      `${pathName}/${menu.id}?category=${menu.category}`
+                    )
                   }}
-                  className={menusStyles.menuImage}
-                />
-                <p>
-                  {menu.category}-{menu.id}.{menu.englishName}
-                </p>
-                <button>Add To Cart</button>
-              </div>
-            ))}
+                >
+                  <div
+                    style={{
+                      backgroundImage: `url('${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${menu.imageName}')`,
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                    }}
+                    className={menusStyles.menuImage}
+                  />
+                  <p>
+                    {menu.category}-{menu.id}.{menu.englishName}
+                  </p>
+                  <button>Add To Cart</button>
+                </div>
+              ))}
           </div>
 
           {/* Cart */}
