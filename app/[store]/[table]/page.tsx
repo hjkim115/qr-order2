@@ -17,7 +17,7 @@ export default function Home() {
     <div className={homeStyles.homeContainer}>
       <div>
         <img
-          src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${logoImageName}`}
+          src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}/${store}/${logoImageName}++++`}
           width={200}
           alt="logo"
         />
